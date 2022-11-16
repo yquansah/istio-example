@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-server
+spec:
+  selector:
+    matchLabels:
+      app: hello-world-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world-server
+    spec:
+      containers:
+      - name: hello-world-server
+        # Below line will be replaced in deploy script
+        image: SERVER_IMAGE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-server
+spec:
+  clusterIP: None
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: hello-world-server
+  selector:
+    app: hello-world-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-client
+spec:
+  selector:
+    matchLabels:
+      app: hello-world-client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world-client
+    spec:
+      containers:
+      - name: hello-world-client
+        # Below line will be replaced in deploy script
+        image: CLIENT_IMAGE
+        env:
+        - name: REMOTE_URL
+          value: http://hello-world-server:8080
