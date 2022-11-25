@@ -43,6 +43,12 @@ install_istio_onto_cluster() {
         done
     
     echo "You are now ready to use istio in local cluster!"
+
+    echo "Enabling sidecar injection in cluster..."
+
+    kubectl label namespace default istio-injection=enabled --overwrite
+
+    echo "Sidecar injection enabled!"
 }
 
 build_docker_images() {
