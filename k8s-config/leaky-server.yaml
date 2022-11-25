@@ -16,6 +16,11 @@ spec:
       - name: leaky-server
         # Below line will be replaced in deploy script
         image: LEAKY_SERVER_IMAGE
+        resources:
+          requests:
+            memory: "30Mi"
+          limits:
+            memory: "40Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -24,8 +29,8 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 8081
+    targetPort: 8081
     protocol: TCP
     name: leaky-server
   selector:

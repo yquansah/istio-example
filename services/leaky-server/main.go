@@ -38,7 +38,7 @@ func run() error {
 	mux.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
 
 	server := &http.Server{
-		Addr:    ":8080",
+		Addr:    ":8081",
 		Handler: mux,
 	}
 
