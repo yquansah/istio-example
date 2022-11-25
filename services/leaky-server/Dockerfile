@@ -9,4 +9,4 @@ COPY . .
 # Build application
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
  
-ENTRYPOINT ["/app/hello-world-server"]
+ENTRYPOINT ["/app/leaky-server"]
